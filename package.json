@@ -1,0 +1,51 @@
+{
+  "name": "SAVE_Website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon db"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TahirHSTU/SAVE_Website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TahirHSTU/SAVE_Website/issues"
+  },
+  "homepage": "https://github.com/TahirHSTU/SAVE_Website#readme",
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "axios": "^0.19.0",
+    "babel-loader": "^8.0.6",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.0.0",
+    "cors": "^2.8.5",
+    "csurf": "^1.10.0",
+    "dompurify": "^1.0.10",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.17.3",
+    "express-session": "^1.16.1",
+    "html-to-pdf-js": "^0.9.3",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "marked": "^0.6.2",
+    "md5": "^2.2.1",
+    "mongodb": "^3.7.2",
+    "nodemon": "^1.19.0",
+    "pdfmake": "^0.2.2",
+    "sanitize-html": "^1.20.1",
+    "socket.io": "^2.2.0",
+    "validator": "^11.0.0",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4"
+  }
+}
