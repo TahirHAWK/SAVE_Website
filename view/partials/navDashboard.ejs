@@ -1,0 +1,16 @@
+
+<% if(from == 'loginDashboard'){ %>
+<div class="sidenav">
+    <a href="/"><img src="./public/logo.png" alt="Save Logo" class="logo"></a>
+    <a href="/">Member Updates</a>
+    <a href="#contact">Post a Blog</a>
+    <a href="#changePassword">Change Password</a>
+    <!-- <a href="#courseInfo">CourseInfo</a> -->
+    <a href="/logOut">LogOut</a>
+  </div>
+  <% } else if(from == 'loginGuest'){%>
+    <div class="sidenav">
+      <a href="/"><img src="./public/logo.png" alt="Save Logo" class="logo"></a>
+      <a href="/">Home</a>
+    </div>
+    <% } %>

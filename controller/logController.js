@@ -1,3 +1,4 @@
+const { promiseImpl } = require('ejs')
 const Logs = require('../model/logModel')
 
 exports.homeLog = function(req, res, next){
@@ -8,4 +9,20 @@ exports.homeLog = function(req, res, next){
         next()
     })
   
+}
+
+exports.errorLog = function(data, category){
+    let errorPromise = new Promise((resolve, reject)=> {
+        let log = new Logs(data)
+        log.errorLog(category).then((result)=>{
+            console.log(result,'<--log recorded successfully')
+            resolve()
+        }).catch((error)=>{
+            console.log(error, '<--log error while inserting db')
+            reject()
+        })
+    })
+
+    return errorPromise
+
 }

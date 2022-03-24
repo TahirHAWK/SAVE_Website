@@ -1,0 +1,18 @@
+<html lang="en">
+  <%- include('./partials/headDashboard.ejs') %>
+
+<body>
+  <%- include('./partials/navDashboard.ejs') %>
+
+  
+  <div class="main">
+    <% errors.forEach(function(message){ %>
+      <div class="alert alert-danger text-center"><%= message %></div>
+    <% }) %>
+
+    
+  </div>
+
+</body>
+
+</html>

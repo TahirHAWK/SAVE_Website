@@ -9,6 +9,9 @@ router.get('/', memberController.home);
 
 // members routes
 router.get('/loginRegister', memberController.loginRegister);
+router.get('/logOut', memberController.logOut);
+router.post('/login', memberController.login)
+router.post('/blogRegister', memberController.blogRegister);
 
 // with logging example 
 // router.get('/',logController.homeLog , memberController.home)

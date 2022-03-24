@@ -44,4 +44,26 @@ Logs.prototype.hourConverter = function(time){
     }
 }
 
+Logs.prototype.errorLog = function(category){
+    // timestamp for error log into db
+    let timestamp = new Date()
+    console.log(timestamp)
+    
+    let errorLogPromise = new Promise((resolve, reject)=> {
+        let errorMsgforDB = {
+            timestamp: timestamp,
+            category: category,
+            errorData: this.data
+        }
+
+        membersLog.insertOne(errorMsgforDB).then((result)=> {
+            resolve(result)
+        }).catch((error)=>{
+            reject(error, 'error while inserting to db')
+        })
+    })
+    return errorLogPromise
+
+}
+
 module.exports = Logs
