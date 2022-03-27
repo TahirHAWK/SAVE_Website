@@ -1,0 +1,76 @@
+<html lang="en">
+  <%- include('./partials/headDashboard.ejs') %>
+
+<body>
+  <%- include('./partials/navDashboard.ejs') %>
+
+  
+  <div class="main">
+
+      <h3>Create a Post</h3>
+    <% errors.forEach(function(message){ %>
+      <div class="alert alert-danger text-center"><%= message %></div>
+      <% }) %>
+      <form class="profile-editor-form-loginDashboard" action="/createBlogPost" method="post">
+        <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= session_data.registerEmail %>" name="registerEmail">
+        <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="waiting" name="status">
+        <table class="table table-sm table-dark">
+          <tbody>
+
+            <tr>
+              <div class="form-group">
+                <th><label for="exampleInputEmail1">Image Link(optional)</label></th>
+                <td><input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Paste your image link, right click on the image and select 'copy image address'" name="imageAddress" ></td>
+              </div>
+            </tr>
+            <tr>
+              <div class="form-group">
+                <th><label for="exampleInputEmail1">Blog Heading</label></th>
+                <td><input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Write your blog heading....." name="blogHeading" required value=""></td>
+              </div>
+            </tr>
+            <tr>
+              <div class="form-group">
+                <th><label for="exampleInputEmail1">Blog Body</label></th>
+                <td><textarea type="text" class="form-control blog-body-textarea-createBlogPost" aria-describedby="emailHelp" placeholder="Enter the blog description here....." name="blogBody" required></textarea></td>
+              </div>
+            </tr>
+       
+            <tr>
+              <th></th>
+              <td><button type="submit" class="btn btn-primary form-submit-of-loginDashboard">Save Post</button>
+              </td></td>
+            </tr>
+    
+    
+          </tbody>
+        </table>  
+      </form>
+
+      <h3>Your posted Blogs</h3>
+      <div id="posted-blogs-on-createBlogPost">
+        <div class="card mb-3">
+            <img class="card-img-top" src="./public/static_images/save_banner.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <button type="submit" class="btn btn-primary form-submit-of-loginDashboard">Edit Post</button>
+              <button type="submit" class="btn btn-primary form-submit-of-loginDashboard">Delete Post</button>
+            </div>
+          </div>
+      </div>
+      
+
+      
+      
+
+
+      
+  </div>
+
+
+
+</body>
+
+</html>

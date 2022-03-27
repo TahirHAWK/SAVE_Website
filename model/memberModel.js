@@ -1,5 +1,7 @@
 const logController = require('../controller/logController')
 const membersAuth = require('../db').db().collection('membersAuth')
+const membersInfo = require('../db').db().collection('membersInfo')
+const blog = require('../db').db().collection('blog')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const { Module } = require('webpack')
@@ -68,13 +70,12 @@ Member.prototype.detectDuplicate = function(){
         if(result != null) {
 
              this.errors.push('The email you entered already assigned to another account. ')
-             //   console.log('from detectDup', this.errors)
             reject(this.errors)
 
          
         } else {
 
-             //   console.log("from detect Duplicate, no duplicates found.")
+        
             resolve('not found')
         }
         
@@ -101,7 +102,7 @@ Member.prototype.register = function(){
                     
             }
             else{
-                 //   console.log('after rejects on model with no duplicate bt cleanup and validation: ',this.errors, result)
+
                 reject(this.errors)
                 
             }
@@ -123,10 +124,8 @@ Member.prototype.login = function(){
         .then((attemptedUser) => {
         if(attemptedUser && bcrypt.compareSync(this.data.registerPassword, attemptedUser.registerPassword)){
             // bcrypt.compareSync is a method of the bcrypt package that compares two values that are accepted as parameters after hashing the first one.
-             //   console.log('user found from User model login prototype: ', attemptedUser)
             resolve(attemptedUser)
         } else { 
-             //   console.log('user not found from User model login prototype!!!')
             reject('invalid username/password!!!!')
 
         }
@@ -137,7 +136,96 @@ Member.prototype.login = function(){
     return loginPromise
 }
 
+Member.prototype.updateProfile = function(){
+    let updatePromise = new Promise((resolve, reject)=>{
+        membersInfo.updateOne({registerEmail: this.data.registerEmail}, {$set: this.data},  { upsert: true }  ).then((result)=>{
+            resolve('Data updated successfully')
+        }).catch((error)=>{
+            logController.errorLog(error, 'error').then((error)=>{
+
+                reject(error)
+            }).catch((error)=>{
+                this.errors.push('Cannot save log errors, please contact developer.')
+                reject(this.errors)
+            }) 
+        })
+
+    })
+    return updatePromise
+}
 
 
+Member.prototype.checkMemberAvailability = function(){
+    let checkMemberPromise = new Promise((resolve, reject)=>{
+        membersInfo.findOne({registerEmail: this.data.registerEmail}).then((result)=>{
+            // check if null
+            if(result == null || result == ''){
+                result = {
+                    registerEmail: '',
+                    aboutMe: '',
+                    designation: '',
+                    facebookID: '',
+                    linkedinID: '',
+                    registerID: ''
+                  }
+            }
+            resolve(result)
+        }).catch((notFound)=>{
+            console.log(notFound, '<== from checkMemberAvailability model not found')
+            if(notFound == null || notFound == ''){
+                notFound = {
+                    registerEmail: '',
+                    aboutMe: '',
+                    designation: '',
+                    facebookID: '',
+                    linkedinID: '',
+                    registerID: ''
+                  }
+            }
+            reject(notFound)
+        })
+    })
+    return checkMemberPromise
+}
+
+Member.prototype.actuallyPostBlog = function(){
+    let postBlogPromise = new Promise((resolve, reject)=>{
+        console.log(this.data) 
+        // trimming spaces and checking empty property
+        this.correctionBlogData()
+        // inserting or updating the db with the new post
+        blog.updateOne({registerEmail: this.data.registerEmail, blogHeading: this.data.blogHeading}, {$set: this.data},  { upsert: true }).then((result)=>{
+            resolve('Your post has been saved successfully, please wait for the admin to review and approve.', result)
+        }).catch((error)=>{
+            logController.errorLog(error, 'error').then((result)=>{
+                // console.log('saved to error log database successfully')
+                reject('Blog cannot be saved, contact your developer.')
+            }).catch((error)=>{
+                // console.log('cannot be saved to error log database')
+                reject('Blog cannot be saved, contact your developer.')
+
+            })
+
+        })
+
+    })
+    return postBlogPromise
+}
+
+Member.prototype.correctionBlogData = function(){
+    // trimming empty spaces
+    this.data.blogHeading = this.data.blogHeading.trim()
+    this.data.blogBody = this.data.blogBody.trim()
+    this.data.imageAddress = this.data.imageAddress.trim()
+
+    // check if imageAddress is empty or not
+    //  if empty set a default image to display at every blog
+    if(this.data.imageAddress == '' || this.data.imageAddress == "" || this.data.imageAddress == null || this.data.imageAddress == undefined){
+        // have to check if the default image link is working or not
+        this.data.imageAddress = "./public/static_images/save_banner.jpg"
+    }
+
+
+}
 
 module.exports = Member

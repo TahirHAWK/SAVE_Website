@@ -6,12 +6,68 @@
 
   
   <div class="main">
+    <h1>Welcome <%= session_data.registerName %></h1>
     <% errors.forEach(function(message){ %>
       <div class="alert alert-danger text-center"><%= message %></div>
-    <% }) %>
+      <% }) %>
+      
+      
+      <h3>Update Your profile</h3>
+    <form class="profile-editor-form-loginDashboard" action="/update_member_profile" method="post">
+    <table class="table table-sm table-dark">
+      <tbody>
+        <tr>
+          <div class="form-group">
+            <th><label for="exampleInputEmail1">Email Address</label></th>
+            <td><input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= session_data.registerEmail %>" name="registerEmail" readonly></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <th><label for="exampleInputEmail1">HSTU ID Number</label></th>
+            <td><input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 1802569" name="registerID" required value="<%= memberInfo.registerID %>"></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <th><label for="exampleInputEmail1">LinkedIn Profile Link</label></th>
+            <td><input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 'https://www.linkedin.com/in/tahiranamtamin/'" name="linkedinID" required value="<%= memberInfo.linkedinID %>"></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <th><label for="exampleInputEmail1">Designation</label></th>
+            <td><input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="will be determined by admin....." name="designation" readonly value="<%= memberInfo.designation %>"></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <th><label for="exampleInputEmail1">Facebook Profile Link</label></th>
+            <td><input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: 'https://www.facebook.com/tahiranam.tamin'" name="facebookID" required value="<%= memberInfo.facebookID %>"></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <th><label for="exampleInputEmail1">About Me</label></th>
+            <td><textarea type="text" class="form-control text-area-of-loginDashboard" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Write something about you in 150 words....." name="aboutMe" required><%= memberInfo.aboutMe %></textarea></td>
+          </div>
+        </tr>
+        <tr>
+          <th></th>
+          <td><button type="submit" class="btn btn-primary form-submit-of-loginDashboard">Update Profile</button>
+          </td></td>
+        </tr>
 
-    
+
+      </tbody>
+    </table>  
+  </form>
+
+
+      
   </div>
+
+
 
 </body>
 
