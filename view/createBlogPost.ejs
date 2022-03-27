@@ -7,10 +7,12 @@
   
   <div class="main">
 
-      <h3>Create a Post</h3>
     <% errors.forEach(function(message){ %>
       <div class="alert alert-danger text-center"><%= message %></div>
       <% }) %>
+      <hr>
+      <h3>Create a Post</h3>
+      <hr>
       <form class="profile-editor-form-loginDashboard" action="/createBlogPost" method="post">
         <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= session_data.registerEmail %>" name="registerEmail">
         <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="waiting" name="status">
@@ -46,19 +48,28 @@
           </tbody>
         </table>  
       </form>
+      
+      
+      <hr>
+
 
       <h3>Your posted Blogs</h3>
+      <hr>
       <div id="posted-blogs-on-createBlogPost">
+        <% previous_posts.forEach((post)=>{  %>
         <div class="card mb-3">
-            <img class="card-img-top" src="./public/static_images/save_banner.jpg" alt="Card image cap">
+            <img class="card-img-top" src="<%= post.imageAddress %>" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <h5 class="card-title"><%= post.blogHeading %></h5>
+              <p class="card-text"><%= post.blogBody %></p>
+              <p class="card-text"><small class="text-muted">Posted By: <%= post.registerEmail %></small> <br> 
+              Status: <%= post.status %>
+              </p>
               <button type="submit" class="btn btn-primary form-submit-of-loginDashboard">Edit Post</button>
-              <button type="submit" class="btn btn-primary form-submit-of-loginDashboard">Delete Post</button>
+              <button  class="btn btn-primary form-submit-of-loginDashboard">Delete Post</button>
             </div>
           </div>
+          <%  }) %>
       </div>
       
 

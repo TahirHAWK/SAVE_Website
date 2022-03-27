@@ -228,4 +228,31 @@ Member.prototype.correctionBlogData = function(){
 
 }
 
+Member.prototype.fetchPreviousPostsByMember = function(){
+    let fetchPostPromise = new Promise((resolve, reject)=>{
+        blog.find({registerEmail: this.data.registerEmail}).toArray().then((result)=>{
+            if(result =='' || result == "" || result == null || result == undefined){
+                result=[{
+                    blogHeading: 'Start writing to post a new one.',
+                    blogBody: 'You have no old Blogs',
+                    imageAddress: './public/static_images/save_banner.jpg',
+                    registerEmail: this.data.registerEmail,
+                    status: 'waiting'
+                }]
+            }
+            resolve(result)
+        }).catch((error)=>{
+            logController.errorLog(error, 'error').then((error)=>{
+                
+                reject('cannot find posts or DB internal error.')
+            }).catch((error)=>{
+                reject('cannot log error data also cannot find previous posts.')
+            })
+        })
+    })
+    return fetchPostPromise
+}
+
+
+
 module.exports = Member

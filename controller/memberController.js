@@ -104,7 +104,16 @@ exports.updateProfile = function(req, res){
 
 exports.createBlogPost = function(req, res){
     // make correction on render of next line
-    res.render('createBlogPost', {from: 'loginDashboard', session_data: req.session.member, errors: req.flash('errors') }) 
+    // fetch the posts previously done by user
+    let member = new Member(req.session.member)
+    member.fetchPreviousPostsByMember().then((result)=>{
+        console.log(result, '<-- from fetchprevious')
+        res.render('createBlogPost', {from: 'loginDashboard', session_data: req.session.member, errors: req.flash('errors'), previous_posts: result }) 
+    }).catch((errors)=>{
+        req.flash('errors', error)
+        res.render('createBlogPost', {from: 'loginDashboard', session_data: req.session.member, errors: req.flash('errors'), previous_posts: '' }) 
+    })
+
 }
 
 exports.actuallyPostBlog = function(req, res){
