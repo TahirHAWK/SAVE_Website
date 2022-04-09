@@ -14,4 +14,18 @@
       <a href="/"><img src="./public/logo.png" alt="Save Logo" class="logo"></a>
       <a href="/">Home</a>
     </div>
+    <% } else if(from == 'AdminGuest'){ %>
+      <div class="sidenav">
+        <a href="/"><img src="./public/logo.png" alt="Save Logo" class="logo"></a>
+        <a href="/">Home</a>
+      </div>
+    <% } else if(from == 'AdminDashboard'){  %>
+ 
+      <div class="sidenav">
+        <a href="/"><img src="./public/logo.png" alt="Save Logo" class="logo"></a>
+        <a href="/">Home</a>
+        <a href="/assignMembers">Assign Member Designations</a>
+        <a href="/approvePosts">Approve/Reject Member Posts</a>
+        <a href="/adminLogout">Log Out</a>
+      </div>
     <% } %>
