@@ -7,9 +7,9 @@ exports.home = function(req, res){
     let member = new Member()
     member.loadBlogsAndStuff().then((result)=>{
 
-        res.render('index', {blog: result})
+        res.render('index', {blog: result.blogs, memberData: result.memberData, memberInfo: result.memberInfo})
     }).catch((error)=>{
-        res.redirect('https://www.google.com')
+        res.redirect('https://www.google.com/search?q=why+should+i+be+a+volunteer&sxsrf=APq-WBs3URDVI4BTTgf8KflTzZZd8amsJw%3A1649611000878&source=hp&ei=-BBTYuCUM-ap4t4P_uS3aA&iflsig=AHkkrS4AAAAAYlMfCE2uO8dEO1HUBzVadG2czRLyQzuh&oq=why+i+should+be+a+vo&gs_lcp=Cgdnd3Mtd2l6EAMYADIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeOgsIABCABBCxAxCDAToICAAQgAQQsQM6CAgAELEDEIMBOggILhCABBCxAzoFCAAQgAQ6CwguEIAEEMcBENEDOgsILhCABBCxAxDUAjoLCC4QgAQQsQMQgwE6CAguEIAEENQCOgoIABCABBBGEP8BOgUILhCABFAAWOErYMk4aABwAHgAgAGCAogBnxeSAQYwLjE4LjKYAQCgAQE&sclient=gws-wiz')
     })
 }
 

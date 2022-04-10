@@ -26,6 +26,7 @@ router.get('/assignMembers', adminController.assignMembers)
 router.post('/submitDesignation', adminController.submitDesignation)
 router.get('/approvePosts', adminController.approvePosts)
 router.post('/approveExistingPost', adminController.approveExistingPost)
+router.post('/contactForm', adminController.PostcontactFormData)
 
 
 // with logging example 

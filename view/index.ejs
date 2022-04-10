@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./public/style.css">
+
 <body id="myPage">
 
 
@@ -22,7 +23,7 @@
   <a href="#pricing" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Our Blogs</a>
   <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
     <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button" title="Notifications">Login</button>     
+    <a href="/loginregister"><button class="w3-button" title="Notifications">Login</button></a>     
   </div>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-teal" title="Search"><i class="fa fa-search"></i></a>
  </div>
@@ -33,7 +34,7 @@
     <a href="#work" class="w3-bar-item w3-button">Our Work</a>
     <a href="#pricing" class="w3-bar-item w3-button">Our Blogs</a>
     <a href="#contact" class="w3-bar-item w3-button">Contact</a>
-    <a href="#" class="w3-bar-item w3-button">Login</a>
+    <a href="/loginregister" class="w3-bar-item w3-button">Login</a>
   </div>
 </div>
 
@@ -55,29 +56,25 @@
 
 <div class="w3-row"><br>
 
-<div class="w3-quarter">
-  <img src="https://scontent.fdac12-1.fna.fbcdn.net/v/t1.6435-9/89386734_1697820517024836_3596813872339615744_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=kTwJCbUZcQsAX-iQz8t&_nc_ht=scontent.fdac12-1.fna&oh=00_AT-rVf5Etlpju7Kgz1cDKHK2U2UV-7Ufo_xqu_woLxo6rg&oe=62031DCC" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
-  <h3>Md. Tahir Anam Tamin</h3>
-  <p>Co-President</p>
+  <% memberInfo.forEach((member)=>{ %>
+    <div class="w3-quarter">
+  <img src="../public/static_images/save_banner.jpg" alt="Default SAVE Background" style="width:45%" class="w3-circle w3-hover-opacity">
+  <% memberData.forEach((memberData)=>{ %>
+    <% if(memberData.registerEmail == member.registerEmail){ %>
+      
+      <h3><%= memberData.registerName %></h3>
+    <% } %>
+  <% }) %>
+  <p><%= member.designation %></p>
 </div>
+  <% }) %>
 
-<div class="w3-quarter">
-  <img src="https://scontent.fdac12-1.fna.fbcdn.net/v/t39.30808-1/c0.0.320.320a/p320x320/242390023_2939880132894331_2859091979558739374_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=7206a8&_nc_ohc=vPspubJ3oXMAX8oAMPx&_nc_oc=AQkaWBuijchAvGowYKvIA5nhEkqlfPR3IH1-ZidL5TqpMcOhd99ExA_iRouztN-DHzc&_nc_ht=scontent.fdac12-1.fna&oh=00_AT8zMTLmArgPVVNSSfUWqoux0ijFYcp_OnFErM4M39BU5g&oe=61E20955" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
-  <h3>Md. Nurullah Sayem</h3>
-  <p>General Secretary</p>
-</div>
 
-<div class="w3-quarter">
-  <img src="https://scontent.fdac12-1.fna.fbcdn.net/v/t1.6435-9/p480x480/74528533_196531468177544_4937411403238604800_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=174925&_nc_ohc=ZQxC5qOk-yoAX-dLAKs&tn=dI38Z6VJJMsHQbYS&_nc_ht=scontent.fdac12-1.fna&oh=00_AT_OUS8rtZSC47ZiIMObFHkDntyxENtrs53BRUJS9J878w&oe=62049513" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
-  <h3>Afsana Ritu</h3>
-  <p>Team Lead(Youth Employability)</p>
-</div>
 
-<div class="w3-quarter">
-  <img src="https://scontent.fdac12-1.fna.fbcdn.net/v/t39.30808-6/256608459_569197827713972_4621876146798820896_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=174925&_nc_ohc=Z2UTsCJLw4cAX9M4cw6&_nc_ht=scontent.fdac12-1.fna&oh=00_AT-kCgN60SjJOhv8uxZd64_jdf--zkxnkiN4k_YesXKYAQ&oe=61E2D7A2" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
-  <h3>Anika Tasnim</h3>
-  <p>Team Lead(SHE Leads)</p>
-</div>
+
+
+
+
 
 </div>
 </div>
@@ -95,11 +92,11 @@
   <% if(blog.category == 'our blog'){ %>
 <div class="w3-quarter">
 <div class="w3-card w3-white">
-  <img src="<%= blog.imageAddress %>" alt="Snow" style="width:100%">
+  <img src="<%= blog.imageAddress %>" alt="Snow" style="width:100%" class="ourBlogImage">
   <div class="w3-container">
   <h3><%= blog.blogHeading %></h3>
 
-  <p><%= blog.blogBody %>
+  <p class="blogBodyofBlogCard"><%= blog.blogBody %>
     #Stop_Communal_Violence</p>
 
   </div>
@@ -125,59 +122,36 @@
 <div class="w3-row-padding w3-center w3-padding-64" id="pricing">
     <h2>Our Works</h2>
     <p>Our members achievements and upcoming news.</p><br>
+
+    <hr>
+    <!-- our works card starts here -->
+    <% blog.forEach((blog)=>{ %>
+      <% if(blog.category == 'our work'){ %>
     <div class="w3-third w3-margin-bottom">
       <ul class="w3-ul w3-border w3-hover-shadow">
         <li class="w3-theme">
-          <p class="w3-xlarge">Students Against Sexual Assault Everywhere</p>
+          <p class="w3-xlarge"><%= blog.blogHeading %></p>
         </li>
-        <li class="w3-padding-16">Posted by Tahir Anam Tamin</li>
+        <li class="w3-padding-16"><img src="<%= blog.imageAddress %>" alt="Default SAVE image" class="ourWorksImage"></li>
+        <% memberData.forEach((member)=>{ %>
+          <% if(member.registerEmail == blog.registerEmail){ %>
+          <li class="w3-padding-16">Posted by <%= member.registerName %></li>
+        <% }})%>
+
         <li class="w3-padding-16">Co - President, SAVE Youth HSTU Chapter</li>
         <li class="w3-padding-16">
-            Congratulations to all the winners of the competition "Students Against Sexual Assault Everywhere" organized by SAVE Youth DU chapter.... 
+          <%= blog.blogBody %>
         </li>
         <li class="w3-theme-l5 w3-padding-24">
           <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Read More</button>
         </li>
       </ul>
     </div>
+    <% } %>
 
-    
-
-    <div class="w3-third w3-margin-bottom">
-        <ul class="w3-ul w3-border w3-hover-shadow">
-          <li class="w3-theme">
-            <p class="w3-xlarge">Youth Action for Resilient Recovery</p>
-          </li>
-          <li class="w3-padding-16">Posted by Anika Tasnim</li>
-          <li class="w3-padding-16">Team Lead(SHE-Leads), SAVE Youth HSTU Chapter</li>
-          <li class="w3-padding-16">
-            Register for
-            Youth Action for Resilient Recovery (Oct 2 & 4)
-            https://forms.gle/WJcJtWHGJFqv87u27.... 
-          </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Read More</button>
-          </li>
-        </ul>
-      </div>   
-       <div class="w3-third w3-margin-bottom">
-        <ul class="w3-ul w3-border w3-hover-shadow">
-          <li class="w3-theme">
-            <p class="w3-xlarge">Committee Announcement</p>
-          </li>
-          <li class="w3-padding-16">Posted by Md. Nurullah Sayem</li>
-          <li class="w3-padding-16">General Secretary, SAVE Youth HSTU Chapter</li>
-          <li class="w3-padding-16">
-            With the guidance from our Honorable Moderator Maám, 
-            Nasrin Naher Bithe 
-            Lecturer, Department of Development Studies, HSTU, Dinajpur-5200
-            We hereby declare our very first committee with whom we will begin our journey towards positivity. .... 
-          </li>
-          <li class="w3-theme-l5 w3-padding-24">
-            <button class="w3-button w3-teal w3-padding-large"><i class="fa fa-check"></i> Read More</button>
-          </li>
-        </ul>
-      </div>   
+    <% }) %>
+   
+    <!-- our works card ends here -->  
        
 </div>
 
@@ -188,12 +162,12 @@
     <div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Contact Us</span></div>
       <h3>Address</h3>
       <p>Meet us here.</p>
-      <p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i>Hajee Mohammad Danesh Science and Technology University, Dinajpur - 5200</p>
-      <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>  +88015221564646464646</p>
-      <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>Save@save.com</p>
+      <p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i>  Hajee Mohammad Danesh Science and Technology University, Dinajpur - 5200</p>
+      <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>  +8801521550852</p>
+      <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>  Save.hstu@gmail.com</p>
     </div>
     <div class="w3-col m7">
-      <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/action_page.php" target="_blank">
+      <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/contactForm" method="post">
       <div class="w3-section">      
         <label>Name</label>
         <input class="w3-input" type="text" name="Name" required>

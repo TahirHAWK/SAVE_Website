@@ -3,7 +3,17 @@ const { result } = require('lodash')
 
 exports.adminLogin = function(req, res){
     if(req.session.admin && req.session.admin.loginAs == 'admin'){
-        res.render('AdminDashboard', {from: 'AdminDashboard', errors: req.flash('errors'), session_data: req.session.admin})
+        let admin = new Admin()
+        admin.showContactFormData().then((result)=>{
+
+            res.render('AdminDashboard', {from: 'AdminDashboard', errors: req.flash('errors'), session_data: req.session.admin, formData: result})
+        }).catch((error)=>{
+            req.flash('errors', error)
+            req.session.save(()=>{
+
+                res.render('AdminGuest', {from: 'AdminGuest', errors: req.flash('errors')})
+            })
+        })
     } else{
     res.render('AdminGuest', {from: 'AdminGuest', errors: req.flash('errors')})
     } 
@@ -136,4 +146,13 @@ exports.approveExistingPost = function(req, res){
     } else{
         res.redirect('/')
     }
+}
+
+exports.PostcontactFormData = function(req, res){
+    let admin = new Admin(req.body)
+    admin.PostcontactFormData().then((result)=>{
+        res.redirect('/')
+    }).catch((error)=>{
+        res.redirect('/')
+    })
 }

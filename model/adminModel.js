@@ -2,10 +2,12 @@ const logController = require('../controller/logController')
 const Member = require('../model/memberModel')
 const adminAuth = require('../db').db().collection('adminAuth')
 const membersInfo = require('../db').db().collection('membersInfo')
+const contactForm = require('../db').db().collection('contactForm')
 const blog = require('../db').db().collection('blog')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const { Module } = require('webpack')
+const { reject } = require('lodash')
 
 let Admin = function(data){
     this.data = data
@@ -182,6 +184,35 @@ Admin.prototype.approveExistingPost = function(){
     return approvePostPromise
 }
 
+
+Admin.prototype.contactFormDataCleanUp = function(){
+
+   return this.data = { Name: this.data.Name.trim(), Email: this.data.Email.trim(), Message: this.data.Message.trim(), Like: this.data.Like}
+}
+
+Admin.prototype.PostcontactFormData = function(){
+    let PostcontactFormDataPromise = new Promise((resolve, reject)=>{
+       this.contactFormDataCleanUp()
+    contactForm.insertOne(this.data).then((result)=>{
+        resolve('Successfully submitted.')
+    }).catch((error)=>{
+        reject('cannot insert data, Please check your internet connection')
+    })
+
+    })  
+    return PostcontactFormDataPromise
+}
+
+Admin.prototype.showContactFormData = function(){
+    let showContactFormDataPromise = new Promise((resolve, reject)=>{
+        contactForm.find().toArray().then((result)=>{
+            resolve(result)
+        }).catch((error)=>{
+            reject('Cannot Access DB')
+        })
+    })
+    return showContactFormDataPromise
+}
 
 module.exports = Admin
 

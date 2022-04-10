@@ -2,3 +2,17 @@
     height: 2.05rem;
 
 }
+
+.ourWorksImage{
+    max-height: 15rem;
+    max-width: 25rem;
+}
+
+.ourBlogImage{
+    min-height: 15rem;
+    max-width: 25rem;
+}
+.blogBodyofBlogCard{
+    max-height: 10rem;
+    overflow: hidden;
+}

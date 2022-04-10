@@ -258,7 +258,20 @@ Member.prototype.fetchPreviousPostsByMember = function(){
 Member.prototype.loadBlogsAndStuff = function(){
     let loadPromise = new Promise((resolve, reject)=>{
         blog.find({status: 'Approved'}).toArray().then((result)=>{
-            resolve(result)
+            let approvedBlogs = result
+            membersAuth.find().toArray().then((memberAuths)=>{
+                let members = memberAuths
+                membersInfo.find().toArray().then((memberPersonalInfo)=>{
+
+                    let data = {memberData: members, blogs: approvedBlogs, memberInfo: memberPersonalInfo}
+                
+                    resolve(data)
+                }).catch((error)=>{
+                    reject('Cannot fetch from DB')
+                })
+            }).catch((error)=>{
+                reject('Cannot fetch from DB')
+            })
         }).catch((error)=>{
             reject('Cannot fetch from DB')
         })
