@@ -86,45 +86,32 @@
 <div class="w3-row-padding w3-padding-64 w3-theme-l1" id="work">
 
 <div class="w3-quarter">
-<h2>Our Work</h2>
+<h2>Our Blog</h2>
 <p>(Students Against Violence Everywhere) SAVE is a youth platform that is led by students to promote tolerance, diversity, and peace. Hajee Mohammad Danesh Science and Technology University is one of the newest Chapters of it.</p>
 </div>
 
+<!-- blog card starts here -->
+ <% blog.forEach((blog)=>{ %>
+  <% if(blog.category == 'our blog'){ %>
 <div class="w3-quarter">
 <div class="w3-card w3-white">
-  <img src="https://scontent.fdac12-1.fna.fbcdn.net/v/t39.30808-6/246721359_377093930808242_3300090555711663706_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=4-Yso-mtat8AX8fWN6s&_nc_ht=scontent.fdac12-1.fna&oh=00_AT9YW_ZnG_6l1Ev1UEhU_DaKOZeiDTV9u4h0NHOrqr4mLA&oe=61E310D3" alt="Snow" style="width:100%">
+  <img src="<%= blog.imageAddress %>" alt="Snow" style="width:100%">
   <div class="w3-container">
-  <h3>Stop_Communal_Violence</h3>
+  <h3><%= blog.blogHeading %></h3>
 
-  <p>Save youth condemns and protest against all forms of communal violence. We stand against all forms of violence.
+  <p><%= blog.blogBody %>
     #Stop_Communal_Violence</p>
 
   </div>
   </div>
 </div>
+  <% } %>
 
-<div class="w3-quarter">
-<div class="w3-card w3-white">
-  <img src="https://scontent.fdac12-1.fna.fbcdn.net/v/t39.30808-6/246513004_376688594182109_3728170840646481112_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=ye-lBSOiUQUAX8GmwpP&_nc_ht=scontent.fdac12-1.fna&oh=00_AT-KU7C62S2CHtfAQiMeOhbkLIZGfYN2IKiE2vJkj1TzKg&oe=61E18877" alt="Snow" style="width:100%">
-  <div class="w3-container">
-  <h3>Stop_Communal_Violence</h3>
-
-  <p>Save youth condemns and protest against all forms of communal violence. We stand against all forms of violence. Be part of our protest through signing in this form. 
-    https://forms.gle/yzyrbVawSm9arWcr9</p>
-
-  </div>
-  </div>
-</div>
-<div class="w3-quarter">
-<div class="w3-card w3-white">
-  <img src="https://scontent.fdac12-1.fna.fbcdn.net/v/t39.30808-6/p843x403/243572323_363759158808386_395405424416974957_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=730e14&_nc_ohc=nyCAVfqpAQIAX97UVnd&_nc_ht=scontent.fdac12-1.fna&oh=00_AT88GB7sJw1TaP6MokrEbrTKeLd__0ybevt8Ike8VKbeMQ&oe=61E19EA1" alt="Snow" style="width:100%">
-  <div class="w3-container">
-  <h3>Youth Action for Resilient Recovery (Oct 2 & 4)</h3>
+ <% }) %>
 
 
-  </div>
-  </div>
-</div>
+
+
 
 
 
@@ -134,9 +121,9 @@
 
 
 
-<!-- Pricing Row -->
+<!-- Our Works Row -->
 <div class="w3-row-padding w3-center w3-padding-64" id="pricing">
-    <h2>Our Blogs</h2>
+    <h2>Our Works</h2>
     <p>Our members achievements and upcoming news.</p><br>
     <div class="w3-third w3-margin-bottom">
       <ul class="w3-ul w3-border w3-hover-shadow">

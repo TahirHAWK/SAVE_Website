@@ -59,3 +59,81 @@ exports.login = function(req, res){
         })
     })
 }
+
+exports.assignMembers = function(req, res){
+    if(req.session.admin && req.session.admin.loginAs == 'admin'){
+    let admin = new Admin()
+    admin.fetchNewMembers(req.session.admin).then((result)=>{
+
+        if(result.length > 0){
+
+            res.render('assignMemberDesignation', {from: 'AdminDashboard', errors: req.flash('errors'), members: result})
+            
+        } else{
+            res.render('assignMemberDesignation', {from: 'AdminDashboard', errors: req.flash('errors'), members: result})
+            
+        }
+
+    }).catch((error)=>{
+        console.log(error, '<<<<-----from reject tab')
+        req.flash('errors', error)
+        req.session.save(function(){
+            res.redirect('/adminLogin')
+        })
+    })
+
+    } else{
+        res.redirect('/')
+    }
+
+}
+
+exports.submitDesignation = function(req, res){
+
+    let admin = new Admin(req.body)
+    admin.updateMemberDesignation().then((result)=>{
+        req.flash('errors', result)
+        req.session.save(function(){
+            res.redirect('/assignMembers')
+        })
+    }).catch((error)=>{
+        req.flash('errors', error)
+        req.session.save(function(){
+            res.redirect('/assignMembers')
+        })
+    })
+}
+
+exports.approvePosts = function(req, res){
+    // checking if the user logged in as admin or not.
+    if(req.session.admin && req.session.admin.loginAs == 'admin'){
+        let admin = new Admin()
+        admin.showPosts().then((result)=>{
+
+            res.render('approvePosts', {from: 'AdminDashboard', errors: req.flash('errors'), blog: result})
+        }).catch((error)=>{
+
+        })
+    } else{
+        res.redirect('/')
+    }
+}
+
+exports.approveExistingPost = function(req, res){
+    if(req.session.admin && req.session.admin.loginAs == 'admin'){
+        let admin = new Admin(req.body)
+        admin.approveExistingPost().then((result)=>{
+            req.flash('errors', result)
+            req.session.save(()=>{
+                res.redirect('/approvePosts')
+            })
+        }).catch((error)=>{
+            req.flash('errors', error)
+            req.session.save(()=>{
+                res.redirect('/approvePosts')
+            })
+        })
+    } else{
+        res.redirect('/')
+    }
+}

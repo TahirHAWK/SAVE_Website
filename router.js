@@ -22,6 +22,10 @@ router.get('/adminLogin', adminController.adminLogin)
 router.post('/adminRegister', adminController.adminRegister)
 router.get('/adminLogout', adminController.logout)
 router.post('/adminLogin', adminController.login)
+router.get('/assignMembers', adminController.assignMembers)
+router.post('/submitDesignation', adminController.submitDesignation)
+router.get('/approvePosts', adminController.approvePosts)
+router.post('/approveExistingPost', adminController.approveExistingPost)
 
 
 // with logging example 

@@ -1,0 +1,96 @@
+<html lang="en">
+  <%- include('./partials/headDashboard.ejs') %>
+
+<body>
+  <%- include('./partials/navDashboard.ejs') %>
+
+  
+  <div class="main">
+    <% errors.forEach(function(message){ %>
+      <div class="alert alert-danger text-center"><%= message %></div>
+    <% }) %>
+
+
+    <h3>Here are the new Members</h3>
+    <% if(typeof(members) === 'string'){ %>
+        Newly Added Members Will be Shown Here....
+    <% } else {members.forEach((member)=>{ %>
+        <form action="/submitDesignation" method="post">
+            <input type="hidden" name="registerID" value="<%= member.registerID %>">
+            <input type="hidden" name="registerEmail" value="<%= member.registerEmail %>">
+        <table class="table table-sm table-dark">
+            <tbody>
+              <tr>
+                <div class="form-group">
+                  <th><label for="exampleInputEmail1">Email Address</label></th>
+                  <td> <%= member.registerEmail %></td>
+                </div>
+              </tr>
+              <tr>
+                <div class="form-group">
+                  <th><label for="exampleInputEmail1">HSTU ID Number</label></th>
+                  <td><%= member.registerID %></td>
+                </div>
+              </tr>
+              <tr>
+                <div class="form-group">
+                  <th><label for="exampleInputEmail1">LinkedIn Profile Link</label></th>
+                  <td><%= member.linkedinID %></td>
+                </div>
+              </tr>
+              <tr>
+                <div class="form-group">
+                  <th><label for="exampleInputEmail1">Designation</label></th>
+                  <% if(member.designation == '' || member.designation == null){ %>
+                  <td><select class="form-select" aria-label="Default select example" name="Designation">
+                    <option selected>Select Designation</option>
+                    <option value="General Secretary">General Secretary</option>
+                    <option value="Co-President">Co-President</option>
+                    <option value="Team Lead">Team Lead</option>
+                    <option value="Executive Member">Executive Member</option>
+                    <option value="Associate Member">Associate Member</option>
+                  </select></td>
+                  <% } else { %>
+                    <td><select class="form-select" aria-label="Default select example" name="Designation">
+                        <option selected><%= member.designation %></option>
+                        <option value="Team Lead">Team Lead</option>
+                        <option value="Executive Member">Executive Member</option>
+                        <option value="Associate Member">Associate Member</option>
+                      </select></td>
+                    <% } %>
+                </div>
+              </tr>
+              <tr>
+                <div class="form-group">
+                  <th><label for="exampleInputEmail1">Facebook Profile Link</label></th>
+                  <td><%= member.facebookID %></td>
+                </div>
+              </tr>
+              <tr>
+                <div class="form-group">
+                  <th><label for="exampleInputEmail1">About Me</label></th>
+                  <td><%= member.aboutMe %></td>
+                </div>
+              </tr>
+              <tr>
+                <th></th>
+                <td><button type="submit" class="btn btn-primary form-submit-of-loginDashboard">Assign Designation</button>
+                </td></td>
+              </tr>
+      
+      
+            </tbody>
+          </table> 
+        </form>
+        
+        
+        
+        
+    <% }) } %>
+
+    
+  </div>
+
+</body>
+
+</html>

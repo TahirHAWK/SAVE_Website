@@ -4,7 +4,13 @@ const { result } = require('lodash')
 
 
 exports.home = function(req, res){
-    res.render('index')
+    let member = new Member()
+    member.loadBlogsAndStuff().then((result)=>{
+
+        res.render('index', {blog: result})
+    }).catch((error)=>{
+        res.redirect('https://www.google.com')
+    })
 }
 
 
@@ -80,7 +86,7 @@ exports.login = function(req, res){
                 res.redirect('/loginRegister')
             })
         
-
+ 
     }).catch((error)=>{
         req.flash('errors', error)
         req.session.save(()=>{

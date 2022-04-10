@@ -130,5 +130,58 @@ Admin.prototype.login = function(){
     return loginPromise
 }
 
+Admin.prototype.fetchNewMembers = function(session){
+    let fetchMembersPromise = new Promise((resolve, reject)=>{
+        membersInfo.find().toArray().then((result)=>{
+            if(result.length > 0){
+            resolve(result) 
+            } else{
+            resolve('There are no members here. Please recruit them first.')
+            }
+           
+        }).catch((error)=>{
+            this.errors.push('Cannot Fetch members, either you have no members or you have database issue, contact developer for details.')
+            reject(this.errors)
+
+        })
+    })
+    return fetchMembersPromise
+}
+
+Admin.prototype.updateMemberDesignation = function(){
+    let updateDesignationPromise = new Promise((resolve, reject)=>{
+        membersInfo.updateOne({registerID: this.data.registerID, registerEmail: this.data.registerEmail}, {$set: {designation: this.data.Designation}}).then((result)=>{
+            resolve(`Successfully Update Designation of ${this.data.registerEmail}.`)
+        }).catch((error)=>{
+            this.errors.push('Server error, please contact developer.')
+            reject(this.errors)
+        })
+    })
+    return updateDesignationPromise
+}
+
+Admin.prototype.showPosts = function(){
+    let showPostsPromise = new Promise((resolve, reject)=>{
+        blog.find().toArray().then((result)=>{
+            resolve(result)
+        }).catch((error)=>{
+            reject('Cannot find Data.')
+        })
+    })
+    return showPostsPromise
+}
+
+Admin.prototype.approveExistingPost = function(){
+    let approvePostPromise = new Promise((resolve, reject)=>{
+        blog.updateOne({registerEmail: this.data.registerEmail, blogHeading: this.data.blogHeading, blogBody: this.data.blogBody}, {$set: {status: this.data.status}}).then((result)=>{
+            resolve('Successfully Updated.')
+        }).catch((error)=>{
+            reject('Cannot connect to server.')
+        })
+    })
+    return approvePostPromise
+}
+
+
 module.exports = Admin
 

@@ -1,0 +1,17 @@
+.approvePostsCards{
+    width: 100%;
+    margin: 0rem;
+}
+.approvePostsCardsImage{
+    height: max-content;
+    max-width: 500px;
+}
+
+#allCardHolder{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: space-evenly;
+    align-items: center;
+}

@@ -1,0 +1,49 @@
+<html lang="en">
+  <%- include('./partials/headDashboard.ejs') %>
+
+<body>
+  <%- include('./partials/navDashboard.ejs') %>
+
+  
+  <div class="main">
+    <% errors.forEach(function(message){ %>
+      <div class="alert alert-danger text-center"><%= message %></div>
+    <% }) %>
+
+
+    <h3>Here are the newest posts which need approval</h3>
+    <div id="allCardHolder">
+     <% blog.forEach((blog)=>{ %>
+        <form action="/approveExistingPost" method="post">
+            <input type="hidden" name="registerEmail" value="<%= blog.registerEmail %>">
+            <input type="hidden" name="blogHeading" value="<%= blog.blogHeading %>">
+            <input type="hidden" name="blogBody" value="<%= blog.blogBody %>">
+
+        <div class="card approvePostsCards" style="width: 18rem;">
+        <img class="card-img-top approvePostsCardsImage" src="<%= blog.imageAddress %>" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Posted by <%= blog.registerEmail %>, Status: 
+            <select class="form-select" aria-label="Default select example" name="status">
+            <option selected><%= blog.status %></option>
+            <option value="waiting">waiting</option>
+            <option value="Approved">Approved</option>
+          </select>
+        </h5>
+          <p class="card-text"><%= blog.blogHeading %></p>
+          <p class="card-text"><%= blog.blogBody %></p>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </div>     
+        </form>
+
+    <% })%>   
+    </div>
+    
+
+
+    
+  </div>
+
+</body>
+
+</html>

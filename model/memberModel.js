@@ -5,6 +5,7 @@ const blog = require('../db').db().collection('blog')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const { Module } = require('webpack')
+const { load } = require('dotenv')
 
 
 let Member = function(data){
@@ -253,6 +254,17 @@ Member.prototype.fetchPreviousPostsByMember = function(){
     return fetchPostPromise
 }
 
+
+Member.prototype.loadBlogsAndStuff = function(){
+    let loadPromise = new Promise((resolve, reject)=>{
+        blog.find({status: 'Approved'}).toArray().then((result)=>{
+            resolve(result)
+        }).catch((error)=>{
+            reject('Cannot fetch from DB')
+        })
+    })
+    return loadPromise
+}
 
 
 module.exports = Member

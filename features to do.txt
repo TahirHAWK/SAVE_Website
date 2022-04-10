@@ -1,0 +1,5 @@
+1. add category on blog collection, ex: category can be blog, events, our works.
+2. separate blank designated members from designated ones in approve members.
+3. Sort by approved/waiting
+4. add edit delete feature for members
+5. add category on posting section of members so when they are posting something new, they can choose which category will it belong to.
