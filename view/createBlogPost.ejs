@@ -65,8 +65,10 @@
               <p class="card-text"><small class="text-muted">Posted By: <%= post.registerEmail %></small> <br> 
               Status: <%= post.status %>
               </p>
-              <button type="submit" class="btn btn-primary form-submit-of-loginDashboard">Edit Post</button>
-              <button  class="btn btn-primary form-submit-of-loginDashboard">Delete Post</button>
+              <a href="/edit/post/<%= post._id %>"><button type="submit" class="btn btn-primary form-submit-of-loginDashboard">Edit Post</button></a>
+              <a href="/delete/post/<%= post._id %>"><button  class="btn btn-primary form-submit-of-loginDashboard">Delete Post</button></a>
+              
+              
             </div>
           </div>
           <%  }) %>
@@ -81,7 +83,7 @@
   </div>
 
 
-
+  <script src="../public/js/createBlogPost.js"></script>
 </body>
 
 </html>

@@ -113,10 +113,9 @@ exports.createBlogPost = function(req, res){
     // fetch the posts previously done by user
     let member = new Member(req.session.member)
     member.fetchPreviousPostsByMember().then((result)=>{
-        console.log(result, '<-- from fetchprevious')
         res.render('createBlogPost', {from: 'loginDashboard', session_data: req.session.member, errors: req.flash('errors'), previous_posts: result }) 
     }).catch((errors)=>{
-        req.flash('errors', error)
+        req.flash('errors', errors)
         res.render('createBlogPost', {from: 'loginDashboard', session_data: req.session.member, errors: req.flash('errors'), previous_posts: '' }) 
     })
 
@@ -126,10 +125,31 @@ exports.actuallyPostBlog = function(req, res){
     let member = new Member(req.body)
     member.actuallyPostBlog().then((result)=>{
         req.flash('errors', result)
-        res.redirect('/createBlogPost')
+        req.session.save(()=>{
+            res.redirect('/createBlogPost')
+        })
+        
     }).catch((error)=>{
         
         req.flash('errors', error)
-        res.redirect('/createBlogPost')
+        req.session.save(()=>{
+        res.redirect('/createBlogPost')    
+        })
+        
+    })
+}
+
+
+exports.displayEditPageForPost = function(req, res){
+    
+    let member = new Member(req.params.id)
+    member.displayPostDataForEditPage().then((result)=>{
+        res.render('displayEditPageForPost', {from: 'loginDashboard', errors: req.flash('errors'), DataToBeEdited: result})
+    }).catch((error)=>{
+        console.log(error)
+        req.flash('errors', error)
+        req.session.save(()=>{
+            res.redirect('/createBlogPost')
+        })
     })
 }

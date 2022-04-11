@@ -1,0 +1,36 @@
+<html lang="en">
+  <%- include('./partials/headDashboard.ejs') %>
+
+<body>
+  <%- include('./partials/navDashboard.ejs') %>
+
+  
+  <div class="main">
+
+    <% errors.forEach(function(message){ %>
+      <div class="alert alert-danger text-center"><%= message %></div>
+      <% }) %>
+      <hr>
+      <h3>Create a Post</h3>
+
+      <h5>Blog heading</h5>
+      <%= DataToBeEdited.blogHeading %>
+      <h5>Blog Body</h5>
+      <%= DataToBeEdited.blogBody %>
+      <h5>Image Address</h5>
+      <%= DataToBeEdited.imageAddress %>
+      <h5>Category</h5>
+        <%= DataToBeEdited.category %>
+
+      
+
+      
+      
+
+
+      
+  </div>
+
+</body>
+
+</html>

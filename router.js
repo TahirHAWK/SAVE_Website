@@ -4,11 +4,8 @@ const memberController = require('./controller/memberController')
 const logController = require('./controller/logController')
 const adminController = require('./controller/adminController')
 
-
-// Home routes
-router.get('/', memberController.home);
-
 // members routes
+router.get('/edit/post/:id', memberController.displayEditPageForPost)
 router.get('/loginRegister', memberController.loginRegister);
 router.get('/logOut', memberController.logOut);
 router.get('/createBlogPost', memberController.createBlogPost)
@@ -16,6 +13,10 @@ router.post('/createBlogPost', memberController.actuallyPostBlog)
 router.post('/login', memberController.login)
 router.post('/blogRegister', memberController.blogRegister);
 router.post('/update_member_profile', memberController.updateProfile)
+
+// Home routes
+router.get('/', memberController.home);
+
 
 // admin routes
 router.get('/adminLogin', adminController.adminLogin)

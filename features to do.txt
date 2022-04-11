@@ -6,3 +6,4 @@
 6. deploy to heroku
 7. add contact form functionality to admin page
 8. image link field for member photo
+9. add custom page loading animation/image

@@ -1,3 +1,4 @@
+const mongodb = require('mongodb')
 const logController = require('../controller/logController')
 const membersAuth = require('../db').db().collection('membersAuth')
 const membersInfo = require('../db').db().collection('membersInfo')
@@ -277,6 +278,19 @@ Member.prototype.loadBlogsAndStuff = function(){
         })
     })
     return loadPromise
+}
+
+
+Member.prototype.displayPostDataForEditPage = function(){
+    let displayPostDataForEditPagePromise = new Promise((resolve, reject)=>{
+       blog.findOne({_id: new mongodb.ObjectId(this.data)}).then((result)=>{
+        resolve(result)
+       }).catch((error)=>{
+        reject('error finding data on DB')
+       })
+
+    })
+    return displayPostDataForEditPagePromise
 }
 
 
