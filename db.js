@@ -6,7 +6,7 @@ const mongodb = require('mongodb')
 // always commit your changes to github after activating the online string and turning off the offline.
 
 //  mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/tahirhawk?retryWrites=true&w=majority
-let connectionString = 'mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/SAVE_WEB?retryWrites=true&w=majority'
+let connectionString = 'mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/tahirhawk?retryWrites=true&w=majority'
 // for online
 
 
