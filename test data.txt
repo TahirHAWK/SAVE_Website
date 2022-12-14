@@ -1,3 +1,30 @@
-{"_id":{"$oid":"623f6384f2551791c843c152"},"registerEmail":"premlal@premlal.com","aboutMe":"  \r\n\r\n\r\n\r\noh man\r\n \r\n\r\n\r\n\r\n\r\n","designation":"Executive Member","facebookID":"6546546","linkedinID":"44546464","registerID":"1802065"}
+const mongodb = require('mongodb')
 
-{"_id":{"$oid":"623f6f8af2551791c843cae3"},"registerEmail":"hossain@hossain.com","aboutMe":"here i am man. Let's go","designation":"Team Lead","facebookID":"some facebook page","linkedinID":"some linkedin pages","registerID":"1802061"}
+let connectionString = 'mongodb://localhost:27017/SAVE_WEB?readPreference=primary&appname=MongoDB%20Compass&ssl=false'
+// for offline  
+        
+// always commit your changes to github after activating the online string and turning off the offline.
+
+
+//  mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/tahirhawk?retryWrites=true&w=majority
+// let connectionString = 'mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/tahirhawk?retryWrites=true&w=majority'
+// for online
+
+
+let port = process.env.PORT
+if(port == null || port == ""){
+  port = 3900
+}
+
+mongodb.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){ 
+  if(err){
+    console.log('You have some errors: ',err)
+  }
+  module.exports = client
+
+  // the require ./app file must be after client, otherwise it would generate an error.
+  const app = require('./app')
+    app.listen(port)
+    console.log(`-------------------- Connected to db and port ${port} --------------------`)
+})
+
