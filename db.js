@@ -2,8 +2,9 @@ const mongodb = require('mongodb')
 
 let connectionString = 'mongodb://localhost:27017/SAVE_WEB?readPreference=primary&appname=MongoDB%20Compass&ssl=false'
 // for offline  
-      
+        
 // always commit your changes to github after activating the online string and turning off the offline.
+
 
 //  mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/tahirhawk?retryWrites=true&w=majority
 // let connectionString = 'mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/tahirhawk?retryWrites=true&w=majority'
@@ -12,7 +13,7 @@ let connectionString = 'mongodb://localhost:27017/SAVE_WEB?readPreference=primar
 
 let port = process.env.PORT
 if(port == null || port == ""){
-  port = 3000
+  port = 3900
 }
 
 mongodb.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){ 
