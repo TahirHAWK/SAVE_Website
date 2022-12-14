@@ -75,9 +75,7 @@ Member.prototype.detectDuplicate = function(){
             reject(this.errors)
 
          
-        } else {
-
-        
+        } else {      
             resolve('not found')
         }
         
