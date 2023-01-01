@@ -6,6 +6,7 @@ const guestController = require('./controller/guestController')
 // Home routes
 router.get('/', guestController.home);
 router.get('/about', guestController.about)
+// router.get('/about', guestController.about)
 
 // other routes will start from here
 
