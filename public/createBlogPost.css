@@ -1,8 +1,0 @@
-.blog-body-textarea-createBlogPost{
-    height: 500px;
-}
-#posted-blogs-on-createBlogPost{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
