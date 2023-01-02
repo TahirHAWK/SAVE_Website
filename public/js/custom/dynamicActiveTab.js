@@ -4,9 +4,8 @@
 let addressbarContents = window.location.href.split("/")
 let addressbarSize = addressbarContents.length
 // now reading the address route to determine which route we are in
-let routeName = addressbarContents[addressbarSize-1]
+let routeName = addressbarContents[addressbarSize-1].toLowerCase()
 // as the home route is empty, we have to make sure of it doesn't cause any problems
-console.log(routeName)
     if(routeName == ''){
         routeName = 'home'
     }
