@@ -1,7 +1,7 @@
 // here the active tab is detected and dynamically assigned according to addressbar route
 
 // converting the web address from the addressbar into an array using split method and determining its size
-let addressbarContents = window.location.href.split("/")
+let addressbarContents = window.location.href.split(/[^A-Za-z]/)
 let addressbarSize = addressbarContents.length
 // now reading the address route to determine which route we are in
 let routeName = addressbarContents[addressbarSize-1].toLowerCase()
