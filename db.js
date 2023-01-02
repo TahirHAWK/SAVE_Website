@@ -1,13 +1,13 @@
 const mongodb = require('mongodb')
+const dotenv = require('dotenv')
+dotenv.config()
 
 // let connectionString = 'mongodb://localhost:27017/portfolio?readPreference=primary&appname=MongoDB%20Compass&ssl=false'
 // for offline  
         
 // always commit your changes to github after activating the online string and turning off the offline.
 
-
-//  mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/tahirhawk?retryWrites=true&w=majority
- let connectionString = 'mongodb+srv://appdev:appdev@appdev.6ppvo.mongodb.net/tahirhawk?retryWrites=true&w=majority'
+ let connectionString = process.env.CONNECTIONSTRING
 // for online
 
 
