@@ -7,10 +7,8 @@ dotenv.config()
 // for online
 
 
-let port = process.env.PORT
-if(port == null || port == ""){
-  port = 3900
-}
+let port = process.env.PORT 
+
 
 mongodb.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){ 
   if(err){
@@ -21,6 +19,7 @@ mongodb.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: tr
   // the require ./app file must be after client, otherwise it would generate an error.
   const app = require('./app')
     app.listen(port)
+    console.log(`Connection String: ${connectionString}`)
     console.log(`-------------------- Connected to db and port ${port} --------------------`)
 })
 

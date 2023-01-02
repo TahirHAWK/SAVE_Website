@@ -11,6 +11,10 @@ router.get('/contact', guestController.contact)
 // other routes will start from here
 
 
+// Wildcard route (normally for displaying routes that won't be found)
+// IMPORTANT: Make sure it is at the end of all routes.
+router.all('*', guestController.notFoundPage);
+
 
 
 module.exports = router

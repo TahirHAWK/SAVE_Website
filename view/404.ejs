@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+     <!-- head will go here dynamically -->
+  <%- include('./partials/headDashboard.ejs') %>
+  <!-- body -->
+  <body class="main-layout">
+      <!-- loader  -->
+      <div class="loader_bg">
+          <div class="loader"><img src="../public/images/loading.gif" alt="The page is loading, please wait..." /></div>
+        </div>
+        <!-- end loader -->
+        <!-- nav will go here dynamically -->
+        <%- include('./partials/navDashboard.ejs') %>
+        
+     
+      <!-- section --> 
+<div class="About-bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="aboutheading">
+               <h3>404 <span class="orange_color">Not Found</span></h3>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+     
+     
+    <!-- footer will be loaded here dynamically -->
+    <%- include('./partials/footer.ejs') %>
+      <!-- JS files will be loaded here dynamically -->
+      <%- include('./partials/javascriptFiles.ejs') %>
+   </body>
+</html>
