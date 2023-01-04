@@ -1,4 +1,4 @@
 
 exports.login = function(req, res){
-    res.render('dashboard') 
+    res.render('portalDashboard') 
 }
