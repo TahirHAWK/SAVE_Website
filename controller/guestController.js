@@ -4,7 +4,7 @@ exports.notFoundPage = function(req, res){
 }
 
 exports.home = function(req, res){
-    res.render('index')
+    res.render('index') 
 }
 
 exports.about = function(req, res){
