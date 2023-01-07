@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+     <!-- head will go here dynamically -->
+  <%- include('./partials/headDashboard.ejs') %>
+  <!-- body -->
+  <body class="main-layout">
+      <!-- loader  -->
+      <div class="loader_bg">
+          <div class="loader"><img src="../public/images/loading.gif" alt="The page is loading, please wait..." /></div>
+        </div>
+        <!-- end loader -->
+        <!-- nav will go here dynamically -->
+        <%- include('./partials/navDashboard.ejs') %>
+        
+     
+        <div class="contact-bg">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="contactheading">
+                     <h3 id="register">Register Account</h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+            <!-- section -->
+            <section class="layout_padding">
+               <div class="container">
+                 
+                  
+                  
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="full comment_form">
+                           <form action="/registerAccount" method="post">
+                              <fieldset>
+                                 <div class="col-md-12">
+                                    <div class="row">
+                                       <div class="col-md-6">
+                                          <input type="text" name="name" placeholder="Name" required />
+                                          <input type="email" name="email" placeholder="Email" required/>
+                                          
+                                       </div>
+                                       <div class="col-md-6">
+                                          <input type="password" name="password" placeholder="Password"  required/>
+                                          <input type="text" name="fbLink" placeholder="Facebook Account Link, Ex: https://www.facebook.com/tahiranam.tamin" required>
+                                       </div>
+                                    </div>
+                                    <div class="row margin_top_30">
+                                       <div class="col-md-12">
+                                          <div class="center">
+                                             <button type="submit">Send</button>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </fieldset>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <!-- end section -->
+
+        <div class="contact-bg">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="contactheading">
+                     <h3 id="login">Login to your Account</h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+            <!-- section -->
+            <section class="layout_padding">
+               <div class="container">
+                 
+                  
+                  
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="full comment_form">
+                           <form action="index.html">
+                              <fieldset>
+                                 <div class="col-md-12">
+                                    <div class="row">
+                                       <div class="col-md-6">
+                                          <input type="text" name="name" placeholder="Name" required="#" />
+                                          <input type="email" name="email" placeholder="Email" required="#" />
+                                           <input type="text" name="subject" placeholder="subject" required="#" />
+                                       </div>
+                                       <div class="col-md-6">
+                                          <textarea class="wdt" placeholder="Comment"></textarea>
+                                       </div>
+                                    </div>
+                                    <div class="row margin_top_30">
+                                       <div class="col-md-12">
+                                          <div class="center">
+                                             <button>Send</button>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </fieldset>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+            <!-- end section -->
+
+     
+    <!-- footer will be loaded here dynamically -->
+    <%- include('./partials/footer.ejs') %>
+      <!-- JS files will be loaded here dynamically -->
+      <%- include('./partials/javascriptFiles.ejs') %>
+   </body>
+</html>
