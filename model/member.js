@@ -69,7 +69,7 @@ Member.prototype.detectDuplicate = function(){
         }    
         }).catch((err)=>{
             // this is part where you make some logs so that it can be used to debug later.
-            console.log("You have some errors(detect duplicate): \n",err)
+            console.log(new Date(), ": You have some errors(detect duplicate model): \n",err)
         })   
     })   
 }
@@ -80,11 +80,23 @@ Member.prototype.register = function(){
         this.validate()
         this.detectDuplicate()
         .then((result)=>{
-            
+            if(result == 'no duplication' && this.errors.length){
+                let salt = bcrypt.genSaltSync(10)
+                this.data.password = bcrypt.hashSync(this.data.password, salt)
+                userData.insertOne(this.data) 
+                .then((result)=>{
+            resolve('done')
         })
+         } // closing if parenthesis
+         else{
+            reject()
+        }
+        })
+       
         .catch((err)=>{
             // this is part where you make some logs so that it can be used to debug later.
-            console.log("You have some errors(register model): \n",err)
+            console.log(new Date(), ": You have some errors(register model): \n",err)
+            reject()
         })
    })
 }
