@@ -1,7 +1,5 @@
 const userData = require('../db').db().collection('userData')
 const bcrypt = require('bcryptjs')
-const { promiseImpl, resolveInclude } = require('ejs')
-const { reject } = require('lodash')
 const validator = require('validator')
 
 
@@ -60,35 +58,35 @@ Member.prototype.validate = function(){
     }
 }
 
-Member.prototype.detectDuplicate = async function(){
-    
-        try{
-         let result = await userData.findOne({email: this.data.email})
-         
-         if(result != null){
-             this.errors.push('Duplicate value exists, use another email.')
-             reject()
+Member.prototype.detectDuplicate = function(){
+    return new Promise((resolve, reject)=>{
+        userData.findOne({email: this.data.email}).then((result)=>{
+        if(result != null){
+            this.errors.push('Duplicate value exists, use another email.')
+            reject('Duplication found')
         } else{
             resolve('no duplication')
-        }
-        } catch(err){
-        console.log('Problem detecting duplicates on system side.')
-        
-        }
-    
+        }    
+        }).catch((err)=>{
+            // this is part where you make some logs so that it can be used to debug later.
+            console.log("You have some errors(detect duplicate): \n",err)
+        })   
+    })   
 }
 
-Member.prototype.register = async function(){
-       try{
+Member.prototype.register = function(){
+    return new Promise((resolve, reject)=>{
         this.cleanUpRegisterData()
         this.validate()
-        let test = await this.detectDuplicate()
-        await console.log('detect duplicate works', test)
-       } catch(err){
-        console.log('from register model',err)
-        this.errors.push('Having problems registering.')
-       }
-
+        this.detectDuplicate()
+        .then((result)=>{
+            
+        })
+        .catch((err)=>{
+            // this is part where you make some logs so that it can be used to debug later.
+            console.log("You have some errors(register model): \n",err)
+        })
+   })
 }
 
 
