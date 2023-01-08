@@ -48,7 +48,7 @@ Member.prototype.validate = function(){
     if(this.data.fbLink == ""){
         this.errors.push('Please enter your facebook account link correctly. Your link will look like this: https://www.facebook.com/tahiranam.tamin')
     } 
-
+    
     // now we check if the email format is correct or not
     if(!validator.isEmail(this.data.email)){
         this.errors.push('The email you entered is not valid in format.')
@@ -61,12 +61,12 @@ Member.prototype.validate = function(){
 Member.prototype.detectDuplicate = function(){
     return new Promise((resolve, reject)=>{
         userData.findOne({email: this.data.email}).then((result)=>{
-        if(result != null){
-            this.errors.push('Duplicate value exists, use another email.')
-            reject('Duplication found')
-        } else{
-            resolve('no duplication')
-        }    
+            if(result != null){
+                this.errors.push('Duplicate value exists, use another email.')
+                reject('Duplication found')
+            } else{
+                resolve('no duplication')
+            }    
         }).catch((err)=>{
             // this is part where you make some logs so that it can be used to debug later.
             console.log(new Date(), ": You have some errors(detect duplicate model): \n",err)
@@ -80,13 +80,13 @@ Member.prototype.register = function(){
         this.validate()
         this.detectDuplicate()
         .then((result)=>{
-            if(result == 'no duplication' && this.errors.length){
+            if(result == 'no duplication' && !this.errors.length){
                 let salt = bcrypt.genSaltSync(10)
                 this.data.password = bcrypt.hashSync(this.data.password, salt)
                 userData.insertOne(this.data) 
                 .then((result)=>{
             resolve('done')
-        })
+                                })
          } // closing if parenthesis
          else{
             reject()
