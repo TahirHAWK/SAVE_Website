@@ -88,9 +88,6 @@ Member.prototype.register = function(){
             resolve('done')
                                 })
          } // closing if parenthesis
-         else{
-            reject()
-        }
         })
        
         .catch((err)=>{
@@ -99,6 +96,24 @@ Member.prototype.register = function(){
             reject()
         })
    })
+}
+
+Member.prototype.login = function(){
+    return new Promise((resolve, reject)=>{
+        this.cleanUpRegisterData()
+        userData.findOne({email: this.data.email})
+        .then((result)=>{
+            if(result && bcrypt.compareSync(this.data.password, result.password)){
+                resolve(result)
+            } else{
+                this.errors.push('The password you entered is incorrect.')
+                reject()
+            }
+        })
+        .catch((err)=>{
+            console.log(new Date(), ': there might be a database problem:\n', err)
+        })
+    })
 }
 
 

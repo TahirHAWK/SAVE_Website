@@ -10,8 +10,9 @@ router.get('/about', guestController.about)
 router.get('/contact', guestController.contact)
 
 // Portal routes
-router.get('/login', memberController.login)
+router.get('/login', memberController.loginPage)
 router.post('/registerAccount', memberController.registerAccount)
+router.post('/login', memberController.loginAccount)
 
 
 // Wildcard route (normally for displaying routes that won't be found)

@@ -1,6 +1,6 @@
 const Member = require('../model/member')
 
-exports.login = function(req, res){
+exports.loginPage = function(req, res){
     res.render('loginRegister') 
 }
 
@@ -16,6 +16,25 @@ exports.registerAccount = function(req, res){
         })
 
     }).catch((error)=>{
+        if(member.errors.length){
+            req.flash('errors', member.errors)
+            req.session.save(()=>{
+                res.redirect('/login')
+            })
+        }
+    })
+}
+
+exports.loginAccount = function(req, res){
+    let member = new Member(req.body)
+    member.login()
+    .then((result)=>{
+        req.session.member = result
+        req.session.save(()=>{
+            res.redirect('/login')
+        })
+    })
+    .catch((err)=>{
         if(member.errors.length){
             req.flash('errors', member.errors)
             req.session.save(()=>{
