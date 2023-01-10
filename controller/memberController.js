@@ -1,7 +1,17 @@
 const Member = require('../model/member')
 
 exports.loginPage = function(req, res){
-    res.render('loginRegister') 
+    let member = new Member(req.session.user)
+    if(req.session.member && req.session.member.userType == 'normal'){
+         member.showBlogs()
+    .then((result)=>{
+        
+        res.render('portalDashboard', result) 
+    })
+    } else{
+        res.render('loginRegister')
+    }
+
 }
 
 exports.registerAccount = function(req, res){

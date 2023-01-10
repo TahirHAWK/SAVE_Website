@@ -1,4 +1,5 @@
 const userData = require('../db').db().collection('userData')
+const blogs = require('../db').db().collection('blogs')
 const bcrypt = require('bcryptjs')
 const validator = require('validator')
 
@@ -112,6 +113,20 @@ Member.prototype.login = function(){
         })
         .catch((err)=>{
             console.log(new Date(), ': there might be a database problem:\n', err)
+        })
+    })
+}
+
+Member.prototype.showBlogs = function(){
+    return new Promise((resolve, reject)=>{
+        blogs.find({}).toArray()
+        .then((result)=>{
+            resolve(result)
+        })
+        .catch((err)=>{
+            console.log('DB error on show blogs model', err)
+            this.data.errors.push('DB error')
+            reject()
         })
     })
 }
