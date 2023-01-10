@@ -13,6 +13,7 @@ router.get('/contact', guestController.contact)
 router.get('/login', memberController.loginPage)
 router.post('/registerAccount', memberController.registerAccount)
 router.post('/login', memberController.loginAccount)
+router.get('/logout', memberController.logout)
 
 
 // Wildcard route (normally for displaying routes that won't be found)
