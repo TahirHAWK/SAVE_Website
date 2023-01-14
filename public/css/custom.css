@@ -39,7 +39,7 @@ body {
     text-align:center;
 }
 .user-image-back {
-    background-color:#8B7BFF;
+    background-color:#428bca;
 }
 h5,.h5 {
     font-size: 14px;
@@ -53,10 +53,10 @@ padding-bottom:20px;
 
 
 .navbar-inverse .navbar-nav > li > a {
-color: #06F;
+color: #428bca;
 }
 .navbar-inverse .navbar-nav > li > a:hover,.navbar-inverse .navbar-nav > li > a:focus {
-color: #06F;
+color: #428bca;
 }
 .arrow {
     float: right;
@@ -92,7 +92,7 @@ color: #06F;
 .sidebar-collapse .nav > li > a {
 background: #FFFFFF;
 text-shadow: none;
-color:#0000FF;
+color:#428bca;
 }
 .sidebar-collapse > .nav > li > a {
 	padding:15px 10px;
@@ -153,17 +153,17 @@ font-size: 25px;
 font-weight: 900;
 }
 .navbar-inverse .navbar-toggle {
-border-color: #8B7BFF;
+border-color: #428bca;
 }
 
 .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
-background-color: #8B7BFF;
+background-color: #428bca;
 }
 .adjust-nav {
     padding-left:20px;padding-right:20px;
 }
 .navbar-toggle {
-    background-color: #8B7BFF;
+    background-color: #428bca;
 }
 
 /*==============================================
