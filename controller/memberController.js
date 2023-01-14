@@ -6,7 +6,7 @@ exports.loginPage = function(req, res){
          member.showBlogs()
     .then((result)=>{
         
-        res.render('portalDashboard', result) 
+        res.render('portalDashboard', {result: result}) 
     })
     } else{
         res.render('loginRegister')
