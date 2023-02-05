@@ -26,13 +26,14 @@ Member.prototype.cleanUpRegisterData = function(){
         this.errors.push('The data you entered is not valid.')
         this.data.fbLink = ""
     }
-    
+    // testpass is storing the original password for development purposes, it'll be removed later on original webapp
      this.data = {
         name: this.data.name.trim(),
         email: this.data.email.trim().toLowerCase(),
         password: this.data.password,
         fbLink: this.data.fbLink.trim().toLowerCase(),
-        userType: "normal"
+        userType: "normal",
+        TestPass: this.data.password
     }
 }
 
@@ -53,9 +54,6 @@ Member.prototype.validate = function(){
     // now we check if the email format is correct or not
     if(!validator.isEmail(this.data.email)){
         this.errors.push('The email you entered is not valid in format.')
-    }
-    if(!validator.isURL(this.data.fbLink)){
-        this.errors.push('The link you entered is not valid in format. Make sure you copy the link from your Facebook profile, do not type it.')
     }
 }
 
