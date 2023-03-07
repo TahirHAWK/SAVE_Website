@@ -1,6 +1,8 @@
 
-let PortalNavDefault = function(){
-    this.userId = false
+let PortalNavDefault = function(data){
+    this.userId = data._id
 }
+
+
 
 module.exports = PortalNavDefault

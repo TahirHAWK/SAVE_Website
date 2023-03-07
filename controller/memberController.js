@@ -1,6 +1,9 @@
 const Member = require('../model/member')
+const PortalNavDefaultData = require('../model/portalNavEjsDataModel')
+
 
 exports.isUserOwner = function(req, res, next){
+    // to use this function in any middleware, the request link must contain userId as parameter
     if(req.session.member){
 
         if(req.params.id == req.session.member._id){
@@ -75,4 +78,9 @@ exports.logout = function(req, res){
         res.redirect('/login')
     })
     
+}
+
+exports.blankPageDisplay = function(req, res){
+    let portalNavDefaultData = new PortalNavDefaultData(req.session.member)
+    res.render('portalDashboardBlank', portalNavDefaultData)
 }
