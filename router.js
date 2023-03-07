@@ -4,7 +4,7 @@ const router = express.Router()
 const guestController = require('./controller/guestController')
 const memberController = require('./controller/memberController') 
 
-// Home routes
+// Guest routes
 router.get('/', guestController.home);
 router.get('/about', guestController.about)
 router.get('/contact', guestController.contact)
@@ -14,7 +14,7 @@ router.get('/login', memberController.loginPage)
 router.post('/registerAccount', memberController.registerAccount)
 router.post('/login', memberController.loginAccount)
 router.get('/logout', memberController.logout)
-
+router.get('/weddingPortal/:id', memberController.isUserOwner, memberController.loginPage)
 
 // Wildcard route (normally for displaying routes that won't be found)
 // IMPORTANT: Make sure it is at the end of all routes.

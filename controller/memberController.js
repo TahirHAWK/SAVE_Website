@@ -1,12 +1,28 @@
 const Member = require('../model/member')
 
+exports.isUserOwner = function(req, res, next){
+    if(req.session.member){
+
+        if(req.params.id == req.session.member._id){
+            console.log('user is legit, we should grant him access.')
+            next()
+        } else{
+            console.log('he is an impostor, he should be kicked out.')
+            res.render('404')
+        }
+    } else{
+        console.log('not a member, please login first')
+        res.redirect('/login')
+    }
+}
+
 exports.loginPage = function(req, res){
     let member = new Member(req.session.user)
     if(req.session.member && req.session.member.userType == 'normal'){
          member.showBlogs()
     .then((result)=>{
         
-        res.render('portalDashboard', {result: result}) 
+        res.render('portalDashboard', {result: result, userId: req.session.member._id}) 
     })
     } else{
         res.render('loginRegister')
