@@ -1,9 +1,0 @@
-
-2. separate blank designated members from designated ones in approve members.
-3. Sort by approved/waiting
-4. add edit delete feature for members ** 
-5. add category on posting section of members so when they are posting something new, they can choose which category will it belong to.
-6. deploy to heroku
-7. add contact form functionality to admin page
-8. image link field for member photo
-9. add custom page loading animation/image 

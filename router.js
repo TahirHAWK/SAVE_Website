@@ -11,6 +11,7 @@ router.get('/contact', guestController.contact)
 
 // Portal routes
 router.get('/login', memberController.loginPage)
+router.get('/login/:id', memberController.isUserOwner, memberController.portalPageAfterLogin)
 router.post('/registerAccount', memberController.registerAccount)
 router.post('/login', memberController.loginAccount)
 router.get('/logout', memberController.logout)

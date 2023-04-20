@@ -111,6 +111,7 @@ Member.prototype.login = function(){
         })
         .catch((err)=>{
             console.log(new Date(), ': there might be a database problem:\n', err)
+            reject()
         })
     })
 }

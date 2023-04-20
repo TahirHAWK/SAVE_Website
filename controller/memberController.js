@@ -10,7 +10,9 @@ exports.isUserOwner = function(req, res, next){
             console.log('user is legit, we should grant him access.')
             next()
         } else{
-            console.log('he is an impostor, he should be kicked out.')
+            console.log('he is not an owner, it should be noted on the session variable so it can later be used to give or restrict edit access.')
+            req.session.member.ownershipOfId = false
+            // for now, it is currently rendering 404 and not allowing any users who arent the owner, later it will be controlled by checking the above variable inside session data
             res.render('404')
         }
     } else{
@@ -20,17 +22,26 @@ exports.isUserOwner = function(req, res, next){
 }
 
 exports.loginPage = function(req, res){
-    let member = new Member(req.session.user)
+    let member = new Member(req.session.member)
     if(req.session.member && req.session.member.userType == 'normal'){
+        // shows the posted blogs by the user
+        res.redirect(`/login/${req.session.member._id}`)
+    } else{
+        res.render('loginRegister')
+    }
+
+}
+
+exports.portalPageAfterLogin = function(req, res){
+    let member = new Member(req.session.member)
+
+        // shows the posted blogs by the user
          member.showBlogs()
     .then((result)=>{
         
         res.render('portalDashboard', {result: result, userId: req.session.member._id}) 
     })
-    } else{
-        res.render('loginRegister')
-    }
-
+     
 }
 
 exports.registerAccount = function(req, res){
@@ -41,7 +52,7 @@ exports.registerAccount = function(req, res){
         member.data.password = result
         req.session.member = member.data
         req.session.save(()=>{
-            res.redirect('/login')
+            res.redirect(`/login/${req.session.member._id}`)
         })
 
     }).catch((error)=>{
@@ -60,7 +71,7 @@ exports.loginAccount = function(req, res){
     .then((result)=>{
         req.session.member = result
         req.session.save(()=>{
-            res.redirect('/login')
+            res.redirect(`/login/${req.session.member._id}`)
         })
     })
     .catch((err)=>{
