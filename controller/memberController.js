@@ -7,13 +7,11 @@ exports.isUserOwner = function(req, res, next){
     if(req.session.member){
 
         if(req.params.id == req.session.member._id){
-            console.log('user is legit, we should grant him access.')
+            req.session.member.ownershipOfId = true
             next()
         } else{
-            console.log('he is not an owner, it should be noted on the session variable so it can later be used to give or restrict edit access.')
             req.session.member.ownershipOfId = false
-            // for now, it is currently rendering 404 and not allowing any users who arent the owner, later it will be controlled by checking the above variable inside session data
-            res.render('404')
+            next()
         }
     } else{
         console.log('not a member, please login first')
@@ -22,7 +20,6 @@ exports.isUserOwner = function(req, res, next){
 }
 
 exports.loginPage = function(req, res){
-    let member = new Member(req.session.member)
     if(req.session.member && req.session.member.userType == 'normal'){
         // shows the posted blogs by the user
         res.redirect(`/login/${req.session.member._id}`)
@@ -33,14 +30,21 @@ exports.loginPage = function(req, res){
 }
 
 exports.portalPageAfterLogin = function(req, res){
-    let member = new Member(req.session.member)
-
-        // shows the posted blogs by the user
-         member.showBlogs()
-    .then((result)=>{
+    if(req.session.member.ownershipOfId == true){
+        let member = new Member(req.session.member)
+    
+            // shows the posted blogs by the user
+             member.showBlogs()
+        .then((result)=>{
+            
+            res.render('portalDashboard', {result: result, userId: req.session.member._id}) 
+        })
         
-        res.render('portalDashboard', {result: result, userId: req.session.member._id}) 
-    })
+    } else{
+        console.log('redirected on the portalpageafterlogin function:')
+        res.redirect('/error404')
+    }
+
      
 }
 

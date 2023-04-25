@@ -1,0 +1,4 @@
+1. make sure to check for bugs on the login registration routes and related functions.
+2. make any adjustments and optimizations if necessary.
+3. use flash messaging on every error, login, register, or even switching routes.
+4. Start working on the add a new blog from UI.
